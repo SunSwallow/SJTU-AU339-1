@@ -8,7 +8,7 @@ length_min = np.inf
 path_min = None
 T = 100000.0
 
-np.random.seed(1)
+np.random.seed(25)
 
 flag_3 = False
 
@@ -16,7 +16,9 @@ loc1 = 0
 loc2 = 0
 loc3 = 0
 
-for i in range(5000000):
+file = open("log.txt", "w")
+
+for i in range(2500000):
 	length_sum = 0
 	for j in range(41):
 		length_sum += cost[searching_list[j]][searching_list[j+1]]
@@ -47,7 +49,8 @@ for i in range(5000000):
 				searching_list[loc2] = tmp2
 				searching_list[loc3] = tmp3
 
-
+	if i % 10000 == 0:
+		file.write(str(length_min)+',')
 
 	T = T * 0.999995
 
@@ -87,5 +90,6 @@ for i in range(5000000):
 
 		flag_3 = True
 
+file.close()
 print(length_min)
 print(path_min)

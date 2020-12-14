@@ -1,7 +1,7 @@
 import numpy as np
 import copy
 
-cluster_find = np.load('cluster_weighted.npy')
+cluster_find = np.load('cluster_unweighted.npy')
 cost = np.load('cost.npy')
 path = np.load('path.npy')
 
@@ -15,8 +15,8 @@ for i in range(num_clusters):
 length_min = np.inf
 path_min = None
 cluster_based_paths_min = copy.deepcopy(cluster_based_paths)
-T = 10000.0
-np.random.seed(17)
+T = 100000.0
+np.random.seed(66)
 
 # cluster swap parameters
 cluster_index1 = 0
@@ -29,8 +29,9 @@ loc1 = 0
 loc2 = 0
 loc3 = 0
 
+file = open("log.txt", "w")
 
-for i in range(1000000):
+for i in range(2500000):
 	length_sum = 0
 
 	searching_list = []
@@ -94,6 +95,9 @@ for i in range(1000000):
 					cluster_based_paths[cluster_index1][loc1] = tmp1
 					cluster_based_paths[cluster_index1][loc2] = tmp2
 					cluster_based_paths[cluster_index1][loc3] = tmp3
+
+	if i % 10000 == 0:
+		file.write(str(length_min)+',')
 
 	T = T * 0.999995
 
@@ -174,5 +178,6 @@ for i in range(1000000):
 
 		flag_3 = True
 
+file.close()
 print(length_min)
 print(path_min)
