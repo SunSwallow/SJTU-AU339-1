@@ -16,7 +16,7 @@ SENSOR_DISTANCE = 50
 LENGTH_OF_SQUARE = 400
 
 maxiter = 100
-SIZE = 10
+SIZE = 20
 
 CROSSOVER_RATE = 0.5
 MUTATION_RATE = 0.001
@@ -157,7 +157,7 @@ def greedy_most_near(sensors, clients, distances):
     return connection_matrix, num_of_success_clients
 
 # 元启发式算法：遗传算法
-def GA(sensors, clients, distances):
+def GA(sensors, clients, distances,maxiter= maxiter, SIZE=SIZE):
     potentialConnect = {}
     potentialConnectDist = {}
     potentialConnectFlag = {}
